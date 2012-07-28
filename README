@@ -1,0 +1,15 @@
+Customizations of Apache Rave for the OpenSocial Foundation's Accelerator (http://accelerator.opensocial2.org)
+
+---------------------------------------
+TO RUN LOCALLY
+---------------------------------------
+mvn install
+cd rave-package
+mvn cargo:start
+
+---------------------------------------
+TO DEPLOY
+---------------------------------------
+mvn -Pprod
+scp rave-portal/target/rave-portal-0.1-SNAPSHOT.war RAVE_EC2HOSTNAME:/opt/tomcat/portal/webapps/portal.war
+scp rave-shindig/target/rave-shindig-0.1-SNAPSHOT.war SHINDIG_EC2HOSTNAME:/opt/tomcat/shindig/webapps/ROOT.war
