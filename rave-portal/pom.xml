@@ -137,7 +137,7 @@
             </activation>
             <id>local</id>
             <properties>
-                <accelerator.propertiesLocation>WEB-INF/classes/portal.properties</accelerator.propertiesLocation>
+                <accelerator.propertiesLocation>classpath:portal.properties</accelerator.propertiesLocation>
             </properties>
             <dependencies>
                 <dependency>

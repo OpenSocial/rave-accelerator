@@ -19,9 +19,10 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-                           http://www.springframework.org/schema/beans/spring-beans.xsd"
-       xmlns:util="http://java.sun.com/xml/ns/persistence">
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+                           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+    >
 
     <bean id="dataSourcePopulator" class="org.apache.rave.jdbc.util.DataSourcePopulator">
         <property name="executeScriptQuery" value="SELECT * FROM RAVE_SHINDIG_SEQUENCES"/>

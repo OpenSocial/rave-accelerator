@@ -37,7 +37,7 @@
             </activation>
             <id>local</id>
             <properties>
-                <accelerator.propertiesLocation>WEB-INF/classes/rave.shindig.properties</accelerator.propertiesLocation>
+                <accelerator.propertiesLocation>classpath:rave.shindig.properties</accelerator.propertiesLocation>
             </properties>
             <dependencies>
                 <dependency>
