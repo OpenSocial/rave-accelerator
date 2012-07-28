@@ -16,17 +16,34 @@
   specific language governing permissions and limitations
   under the License.
   -->
-        
+
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+                           http://www.springframework.org/schema/beans/spring-beans.xsd"
+       xmlns:util="http://java.sun.com/xml/ns/persistence">
 
     <bean id="dataSourcePopulator" class="org.apache.rave.jdbc.util.DataSourcePopulator">
         <property name="executeScriptQuery" value="SELECT * FROM RAVE_SHINDIG_SEQUENCES"/>
         <property name="scriptLocations">
             <list>
             </list>
+        </property>
+    </bean>       <!--Define the property since Shindig no longer supports setting system properties via context -->
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean" name="propertyInjector" autowire-candidate="false" id="propertyInjector">
+        <property name="targetObject">
+            <!-- System.getProperties() -->
+            <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+                <property name="targetClass" value="java.lang.System" />
+                <property name="targetMethod" value="getProperties" />
+            </bean>
+        </property>
+        <property name="targetMethod" value="putAll" />
+        <property name="arguments">
+            <!-- The new Properties -->
+            <util:properties>
+                <prop key="rave-shindig.override.properties">${accelerator.propertiesLocation}</prop>
+            </util:properties>
         </property>
     </bean>
 </beans>
