@@ -37,7 +37,7 @@
         <div>
             <label for="gadget_view">(optional) View</label>
             <input class="input-xlarge" type="text" name="gadget_url" id="gadget_view" required="false"
-                   placeholder="CANVAS" />
+                   placeholder="home" />
         </div>
         <div>
             <a href="#" class="btn btn-primary"
