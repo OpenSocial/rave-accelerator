@@ -63,7 +63,7 @@
     accelerator.navigateUrl = function () {
         accelerator._current_url = $("#gadget_url").val();
         accelerator._current_view = $("#gadget_view").val();
-        $.getJSON(rave.getContext() + "opensocial/token/create?url=" + encodeURI(accelerator._current_url),accelerator._handleTokenResponse);
+        $.getJSON(rave.getContext() + "opensocial/metadata?url=" + encodeURI(accelerator._current_url),accelerator._handleTokenResponse);
     };
 
     accelerator.render = function (dialog) {
@@ -85,10 +85,12 @@
     };
 
     accelerator._loadSecurityToken = function (response) {
-        var commonContainerTokenData = {}, preloadConfig = {}, commonContainerTokenWrapper = {};
-        commonContainerTokenData[osapi.container.TokenResponse.TOKEN] = response[accelerator._current_url];
+        var commonContainerTokenData = {}, preloadConfig = {}, commonContainerTokenWrapper = {}, commonContainerMetadataWrapper = {};
+        commonContainerMetadataWrapper[accelerator._current_url] = gadgets.json.parse(response.metadata);
+        commonContainerTokenData[osapi.container.TokenResponse.TOKEN] = response.token;
         commonContainerTokenData[osapi.container.MetadataResponse.RESPONSE_TIME_MS] = new Date().getTime();
         commonContainerTokenWrapper[accelerator._current_url] = commonContainerTokenData;
+        preloadConfig[osapi.container.ContainerConfig.PRELOAD_METADATAS] = commonContainerMetadataWrapper
         preloadConfig[osapi.container.ContainerConfig.PRELOAD_TOKENS] = commonContainerTokenWrapper;
         rave.opensocial.container().preloadCaches(preloadConfig);
     };

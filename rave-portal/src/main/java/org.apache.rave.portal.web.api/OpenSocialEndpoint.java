@@ -9,7 +9,9 @@ import org.apache.rave.portal.model.impl.RegionImpl;
 import org.apache.rave.portal.model.impl.RegionWidgetImpl;
 import org.apache.rave.portal.model.impl.WidgetImpl;
 import org.apache.rave.portal.service.UserService;
+import org.apache.rave.provider.opensocial.service.OpenSocialService;
 import org.apache.rave.provider.opensocial.service.SecurityTokenService;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,19 +26,26 @@ import java.util.Map;
  * Rave currently doesn't expose the security token generation endpoint
  */
 @Controller
-public class OpenSocialService {
+public class OpenSocialEndpoint {
+
+    private Logger log = org.slf4j.LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private SecurityTokenService tokenService;
 
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private OpenSocialService openSocialService;
+
     @ResponseBody
-    @RequestMapping(value="/opensocial/token/create", method = RequestMethod.GET)
+    @RequestMapping(value="/opensocial/metadata", method = RequestMethod.GET)
     public Map<String, ?> getToken(@RequestParam(required = true) String url) {
         RegionWidget temporaryWidget = getTemporaryRegionWidget(url);
-        Map<String, String> returnVal = new HashMap<String, String>();
-        returnVal.put(url, tokenService.getEncryptedSecurityToken(temporaryWidget));
+        Map<String, Object> returnVal = new HashMap<String, Object>();
+        returnVal.put("token", tokenService.getEncryptedSecurityToken(temporaryWidget));
+        returnVal.put("metadata", openSocialService.getGadgetMetadata(url));
         return returnVal;
     }
 
