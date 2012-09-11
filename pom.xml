@@ -11,7 +11,7 @@
     <packaging>pom</packaging>
     <version>0.1-SNAPSHOT</version>
     <properties>
-        <apache.rave.version>0.14-SNAPSHOT</apache.rave.version>
+        <apache.rave.version>0.15</apache.rave.version>
         <spring.version>3.1.0.RELEASE</spring.version>
         <javax.mail.version>1.4.4</javax.mail.version>
         <javax.activation.version>1.1</javax.activation.version>
