@@ -49,8 +49,7 @@
         <profile>
             <id>prod</id>
             <properties>
-                <accelerator.propertiesLocation>/apps/accelerator/config/rave.shindig.properties
-                </accelerator.propertiesLocation>
+                <accelerator.propertiesLocation>/apps/accelerator/config/rave.shindig.properties</accelerator.propertiesLocation>
             </properties>
             <dependencies>
                 <dependency>

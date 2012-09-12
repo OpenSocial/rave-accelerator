@@ -5,7 +5,7 @@ TO RUN LOCALLY
 ---------------------------------------
 mvn install
 cd rave-package
-mvn cargo:start
+mvn cargo:run
 
 ---------------------------------------
 TO DEPLOY
