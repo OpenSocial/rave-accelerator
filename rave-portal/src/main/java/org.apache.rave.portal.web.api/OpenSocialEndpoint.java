@@ -42,6 +42,7 @@ public class OpenSocialEndpoint {
     @ResponseBody
     @RequestMapping(value="/opensocial/metadata", method = RequestMethod.GET)
     public Map<String, ?> getToken(@RequestParam(required = true) String url) {
+        log.debug("Getting metadata & token for " + url);
         RegionWidget temporaryWidget = getTemporaryRegionWidget(url);
         Map<String, Object> returnVal = new HashMap<String, Object>();
         returnVal.put("token", tokenService.getEncryptedSecurityToken(temporaryWidget));
