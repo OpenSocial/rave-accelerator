@@ -56,19 +56,24 @@ insert into widget (entity_id, title, url, type, description, author, widget_sta
 values(@code_runner, 'Jive Code Runner II','http://apphosting.jivesoftware.com/apps/dev/jivecr2/app.xml', 'OpenSocial', 'Quick app to execute OpenSocial and Jive Core API ''gists''. The Jive Code Runner II is integrated with github''s gist.', 'Mark Weitzel', 'PUBLISHED', '', 'mark.weitzel@jivesoftware.com', @user_id_1);
 UPDATE RAVE_PORTAL_SEQUENCES SET seq_count = (seq_count + 1) WHERE seq_name = @widget_seq;
 
+set @activity_streams_widget_id = (SELECT seq_count FROM RAVE_PORTAL_SEQUENCES WHERE seq_name = @widget_seq);
+insert into widget (entity_id, title, url, type, widget_status, description, author, owner_id)
+values(@activity_streams_widget_id, 'Activity Streams', 'http://localhost:8080/samplecontainer/examples/ActivityStreams/ActivityStreamGadget.xml', 'OpenSocial', 'PUBLISHED', 'Sample Activity Streams gadget from Shindig', 'Apache Shindig', @user_id_1);
+UPDATE RAVE_PORTAL_SEQUENCES SET seq_count = (seq_count + 1) WHERE seq_name = @widget_seq;
+
 set @three_col_id = (SELECT seq_count FROM RAVE_PORTAL_SEQUENCES WHERE seq_name = @page_layout_seq);
 insert into page_layout (entity_id, code,  number_of_regions, render_sequence, user_selectable)
-values (@three_col_id, 'columns_3', 3, 5, true);
+values (@three_col_id, 'columns_3', 3, 1, true);
 UPDATE RAVE_PORTAL_SEQUENCES SET seq_count = (seq_count + 1) WHERE seq_name = @page_layout_seq;
 
 set @newuser_col_id = (SELECT seq_count FROM RAVE_PORTAL_SEQUENCES WHERE seq_name = @page_layout_seq);
 insert into page_layout (entity_id, code,  number_of_regions, render_sequence, user_selectable)
-values (@newuser_col_id, 'columns_3_newuser', 3, 5, true);
+values (@newuser_col_id, 'columns_3_newuser', 3, 2, true);
 UPDATE RAVE_PORTAL_SEQUENCES SET seq_count = (seq_count + 1) WHERE seq_name = @page_layout_seq;
 
 set @person_profile_layout_id = (SELECT seq_count FROM RAVE_PORTAL_SEQUENCES WHERE seq_name = @page_layout_seq);
 insert into page_layout (entity_id, code,  number_of_regions, render_sequence, user_selectable)
-values (@person_profile_layout_id, 'person_profile', 1, 8, false);
+values (@person_profile_layout_id, 'person_profile', 1, 3, false);
 UPDATE RAVE_PORTAL_SEQUENCES SET seq_count = (seq_count + 1) WHERE seq_name = @page_layout_seq;
 
 set @user_id_1 = (SELECT seq_count FROM RAVE_PORTAL_SEQUENCES WHERE seq_name = @user_seq);
