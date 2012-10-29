@@ -118,6 +118,11 @@ set @page_2_region_1 = (SELECT seq_count FROM RAVE_PORTAL_SEQUENCES WHERE seq_na
 INSERT INTO region(entity_id, page_id, render_order, locked)
 values (@page_2_region_1, @page_2_id, 1, false);
 UPDATE RAVE_PORTAL_SEQUENCES SET seq_count = (seq_count + 1) WHERE seq_name = @region_seq;
+
+set @next_region_widget = (SELECT seq_count FROM RAVE_PORTAL_SEQUENCES WHERE seq_name = @region_widget_seq);
+INSERT INTO region_widget(entity_id, widget_id, region_id, render_order, collapsed, locked, hide_chrome)
+values (@next_region_widget, @code_runner, @page_2_region_1, 0, FALSE, FALSE, FALSE);
+UPDATE RAVE_PORTAL_SEQUENCES SET seq_count = (seq_count + 1) WHERE seq_name = @region_widget_seq;
 -- End --
 
 set @user_authority_id = (SELECT seq_count FROM RAVE_PORTAL_SEQUENCES WHERE seq_name = @granted_authority_seq);
